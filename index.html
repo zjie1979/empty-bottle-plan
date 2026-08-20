@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#16746a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="空瓶计划">
+    <title>空瓶计划</title>
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="apple-touch-icon" href="./icons/icon-180.png">
+    <link rel="icon" href="./icons/icon-192.png">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <img src="./icons/icon-192.png" alt="" class="brand-icon">
+          <div>
+            <h1>空瓶计划</h1>
+            <p>先用完家里的，再决定要不要买。</p>
+          </div>
+        </div>
+        <button class="icon-button" id="backupButton" type="button" aria-label="备份和恢复">⇄</button>
+      </header>
+
+      <section class="summary-band" aria-label="今日概览">
+        <div>
+          <span class="label">今日优先</span>
+          <strong id="todayCount">0</strong>
+        </div>
+        <div>
+          <span class="label">已空瓶</span>
+          <strong id="doneCount">0</strong>
+        </div>
+        <div>
+          <span class="label">忍住没买</span>
+          <strong id="pausedCount">0</strong>
+        </div>
+      </section>
+
+      <nav class="tabs" aria-label="页面切换">
+        <button class="tab is-active" type="button" data-tab="today">今天</button>
+        <button class="tab" type="button" data-tab="items">清单</button>
+        <button class="tab" type="button" data-tab="wish">想买</button>
+        <button class="tab" type="button" data-tab="review">复盘</button>
+      </nav>
+
+      <section class="panel is-active" id="todayPanel" data-panel="today">
+        <div class="section-title">
+          <h2>今天先用</h2>
+          <button class="small-button" id="seedButton" type="button">放入示例</button>
+        </div>
+        <div class="focus-list" id="todayList"></div>
+      </section>
+
+      <section class="panel" id="itemsPanel" data-panel="items">
+        <form class="entry-form" id="itemForm">
+          <div class="form-grid">
+            <label>
+              名称
+              <input id="itemName" name="name" type="text" maxlength="24" placeholder="洗面奶 / 燕麦 / 洗衣液" required>
+            </label>
+            <label>
+              分类
+              <select id="itemCategory" name="category">
+                <option value="护肤">护肤</option>
+                <option value="清洁">清洁</option>
+                <option value="食品">食品</option>
+                <option value="饮品">饮品</option>
+                <option value="调料">调料</option>
+                <option value="日用">日用</option>
+              </select>
+            </label>
+            <label>
+              剩余
+              <input id="itemQty" name="qty" type="number" min="1" max="999" inputmode="numeric" value="1" required>
+            </label>
+            <label>
+              单位
+              <input id="itemUnit" name="unit" type="text" maxlength="6" value="次">
+            </label>
+            <label>
+              位置
+              <input id="itemPlace" name="place" type="text" maxlength="14" placeholder="冰箱 / 卫生间">
+            </label>
+            <label>
+              到期日
+              <input id="itemExpire" name="expire" type="date">
+            </label>
+          </div>
+          <label class="checkbox-line">
+            <input id="itemOpened" name="opened" type="checkbox">
+            已开封，优先用
+          </label>
+          <button class="primary-button" type="submit">加入空瓶计划</button>
+        </form>
+        <div class="inventory-list" id="inventoryList"></div>
+      </section>
+
+      <section class="panel" id="wishPanel" data-panel="wish">
+        <form class="entry-form compact" id="wishForm">
+          <label>
+            想买什么
+            <input id="wishName" type="text" maxlength="24" placeholder="先记下来，72小时后再看" required>
+          </label>
+          <label>
+            家里可替代
+            <input id="wishAlt" type="text" maxlength="32" placeholder="例如：先用完库存面膜">
+          </label>
+          <button class="primary-button" type="submit">先不买，加入冷静清单</button>
+        </form>
+        <div class="wish-list" id="wishList"></div>
+      </section>
+
+      <section class="panel" id="reviewPanel" data-panel="review">
+        <div class="review-card">
+          <h2>本周复盘</h2>
+          <p id="reviewText"></p>
+          <div class="progress-bar" aria-label="空瓶进度">
+            <span id="progressFill"></span>
+          </div>
+        </div>
+        <div class="history-list" id="historyList"></div>
+      </section>
+    </main>
+
+    <dialog id="backupDialog">
+      <form method="dialog" class="dialog-card">
+        <h2>备份和恢复</h2>
+        <p>记录只保存在当前浏览器。换手机、换浏览器或清理缓存前，先导出一份。</p>
+        <textarea id="backupText" rows="7" spellcheck="false"></textarea>
+        <div class="dialog-actions">
+          <button type="button" class="secondary-button" id="exportButton">导出</button>
+          <button type="button" class="secondary-button" id="importButton">恢复</button>
+          <button type="submit" class="primary-button">关闭</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js" defer></script>
+  </body>
+</html>

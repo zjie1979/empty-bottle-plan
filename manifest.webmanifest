@@ -1,0 +1,29 @@
+{
+  "name": "空瓶计划",
+  "short_name": "空瓶计划",
+  "description": "先用完家里的用的、吃的，再决定要不要买。",
+  "start_url": "./?v=20260820",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7fbf8",
+  "theme_color": "#16746a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icons/icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
