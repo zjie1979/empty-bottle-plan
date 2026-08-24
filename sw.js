@@ -1,10 +1,10 @@
-const CACHE_NAME = "empty-bottle-plan-20260820-v1";
+const CACHE_NAME = "empty-bottle-plan-20260820-v1-nozoom-20260824";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
-  "./manifest.webmanifest",
+  "./manifest.webmanifest?v=nozoom-20260824",
   "./icons/icon-180.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png"

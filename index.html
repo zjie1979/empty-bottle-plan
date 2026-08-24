@@ -2,16 +2,57 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#16746a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="空瓶计划">
     <title>空瓶计划</title>
-    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="manifest" href="./manifest.webmanifest?v=nozoom-20260824">
     <link rel="apple-touch-icon" href="./icons/icon-180.png">
     <link rel="icon" href="./icons/icon-192.png">
     <link rel="stylesheet" href="./styles.css">
+    <style data-app-zoom-lock>
+      html {
+        -webkit-text-size-adjust: 100%;
+        touch-action: manipulation;
+        overscroll-behavior: none;
+      }
+
+      body {
+        overscroll-behavior: none;
+      }
+
+      button,
+      a,
+      input,
+      textarea,
+      select,
+      [role="button"] {
+        touch-action: manipulation;
+      }
+    </style>
+    <script data-app-zoom-lock>
+      (function () {
+        var lastTouchEnd = 0;
+        var preventZoom = function (event) {
+          event.preventDefault();
+        };
+
+        document.addEventListener("gesturestart", preventZoom, { passive: false });
+        document.addEventListener("gesturechange", preventZoom, { passive: false });
+        document.addEventListener("gestureend", preventZoom, { passive: false });
+        document.addEventListener("touchend", function (event) {
+          var now = Date.now();
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+          }
+          lastTouchEnd = now;
+        }, { passive: false });
+      })();
+    </script>
   </head>
   <body>
     <main class="app-shell">
